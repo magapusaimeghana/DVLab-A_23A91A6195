@@ -1,47 +1,46 @@
 #load the dataset
-data(iris)
+data(airquality)
 
 #inspect the data
-?iris
-head(iris,3)
-str(iris)
-class(iris)
+?airquality
+head(airquality,3)
+str(airquality)
+class(airquality)
 
 #count of each species and to see data in column "species"
-iris$Species
-View(iris)
+airquality$Day
+View(airquality)
 
 #ploting a bar chart
 barplot(
-  table(iris$Species),
-  col='pink'
+  table(airquality$Day)
 )
 
 #labeld bar chart
 barplot(
-  table(iris$Species),
-  main="Count of Iris Species",
-  xlab="Species",
-  ylab="Number of Items",
+  table(airquality$Day),
+  main="Count of airquality day",
+  xlab = "Day",
+  ylab = "Frequency",
   col='steelblue'
 )
 
 #bar plot from aggregated data using mean sepal length per species
-mean_sepal<-tapply(iris$Sepal.Length,iris$Species,mean)
-mean_sepal
+mean_wind<-tapply(airquality$Wind,airquality$Day,mean)
+mean_wind
 
 barplot(
-  mean_sepal,
+  mean_wind,
   col='orange',
-  main="Average Sepal Length by Species",
-  xlab="Species",
-  ylab="Mean Sepal Length"
+  main="Average Wind Speed by Day",
+  xlab="Day",
+  ylab="Mean Wind Speed"
 )
 
 #grouped bar chart
 group_means<-rbind(
-  sepal=tapply(iris$Sepal.Length,iris$Species,mean),
-  petal=tapply(iris$Petal.Length,iris$Species,mean)
+  wind=tapply(airquality$Wind,airquality$Day,mean),
+  temp=tapply(airquality$Temp,airquality$Day,mean)
 )
 group_means
 
@@ -50,12 +49,12 @@ barplot(
   beside=TRUE,
   col=c("skyblue","pink"),
   legend.text=TRUE,
-  main="Clustered Bar Chart: Sepal vs Petal Length"
+  main="Clustered Bar Chart: Wind vs Temp by Day"
 )
 barplot(
   group_means,
   beside=FALSE,
   col=c("skyblue","pink"),
   legend.text=TRUE,
-  main="Stacked Bar Chart: Sepal vs Petal Length",
+  main="Stacked Bar Chart: Wind vs Temp by Day",
 )
