@@ -35,3 +35,31 @@ pairs(iris[,1:4],col=as.numeric(iris$Species),pch=16,
 
 #Using GGPlot2
 #load ggplot2
+library(ggplot2)
+# Basic Scatter Plot
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +
+  geom_point()
+# Colored Scatter by Species
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color =
+                   Species)) +
+  geom_point(size = 2) +
+  theme_minimal()
+# Multivariate Scatter Plot
+# Color + Size encoding
+ggplot(
+  iris,
+  aes(
+    x = Sepal.Length,
+    y = Sepal.Width,
+    color = Species,
+    size = Petal.Length
+  )
+) +
+  geom_point(alpha = 0.7) +
+  theme_minimal()
+# Faceted Scatter Plot
+# One scatter plot per species
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +
+  geom_point(color = "steelblue") +
+  facet_wrap(~Species) +
+  theme_minimal()
